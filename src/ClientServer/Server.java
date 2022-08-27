@@ -1,6 +1,5 @@
 package ClientServer;
 
-import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.net.*;
 import java.util.Scanner;
