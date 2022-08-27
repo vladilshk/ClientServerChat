@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.*;
 import java.util.Scanner;
 import java.util.concurrent.*;
+import java.nio.charset.Charset;
 
 
 
@@ -64,7 +65,6 @@ public class Client {
         Future future = service.submit(new Runnable() {
             @Override
             public void run() {
-
                 System.out.println("Waiting for connection...");
                 try {
                     clientSocket.send(sendingPacket);

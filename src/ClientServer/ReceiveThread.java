@@ -38,6 +38,7 @@ public class ReceiveThread extends Thread {
         DatagramPacket inputPacket = new DatagramPacket(buf, buf.length);
         socket.receive(inputPacket);
         String receivedData = new String(inputPacket.getData(), StandardCharsets.UTF_8);
+
         System.out.println(massageDecoding(receivedData));
         }
     }

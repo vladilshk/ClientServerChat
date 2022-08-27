@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class SendThread extends Thread {
@@ -21,6 +22,7 @@ public class SendThread extends Thread {
     }
 
     public void run() {
+        startMassage();
         while (getConnection()) {
             String[] str = new String[2];
             while (getConnection()) {
@@ -53,11 +55,16 @@ public class SendThread extends Thread {
             strings[1] = getNameFromMassage(massage);
             notifyUser(getUserName() + " changed his/her name to " + strings[1], senderAddress, senderPort, socket);
             return strings;
+
+        } else if (massage.matches("@.*")) {
+            System.out.println("Wrong command, try again");
+            strings[0] = "2";
+            return strings;
         } else {
             massage = getUserName() + ": " + massage;
             massage = massage.length() + "/" + massage;
             DatagramPacket outputPacket = new DatagramPacket(
-                    massage.getBytes(), massage.getBytes().length,
+                    massage.getBytes(StandardCharsets.UTF_8), massage.getBytes().length,
                     senderAddress, senderPort
             );
             socket.send(outputPacket);
@@ -124,6 +131,12 @@ public class SendThread extends Thread {
             Client.setName(name);
         else
             Server.setName(name);
+    }
+
+    public void startMassage(){
+        System.out.println("\n1. Set the user name (@name Vasya)");
+        System.out.println("2. Send a text message (Hello)");
+        System.out.println("3. Exit (@quit)\n");
     }
 
 

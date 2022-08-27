@@ -4,6 +4,7 @@ import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.net.*;
 import java.util.Scanner;
+import java.nio.charset.Charset;
 
 public class Server {
     private static DatagramSocket serverSocket;
